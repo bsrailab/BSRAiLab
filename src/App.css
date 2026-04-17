@@ -1088,3 +1088,159 @@ th {
     min-width: 980px;
   }
 }
+
+/* n8n-style dark canvas */
+.n8n-canvas {
+  width: 100%;
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: #0b0f14;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+}
+
+.n8n-canvas__svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  font-family: inherit;
+}
+
+.n8n-canvas__frame {
+  fill: #0b0f14;
+  stroke: rgba(255, 255, 255, 0.10);
+  stroke-width: 1.2;
+}
+
+.n8n-canvas__title {
+  fill: rgba(255, 255, 255, 0.86);
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+}
+
+.n8n-node {
+  fill: rgba(20, 24, 31, 0.96);
+  stroke: rgba(255, 255, 255, 0.18);
+  stroke-width: 1.4;
+  filter: drop-shadow(0 14px 28px rgba(0, 0, 0, 0.45));
+}
+
+.n8n-node--trigger {
+  stroke: rgba(34, 197, 94, 0.55);
+}
+
+.n8n-node--runtime {
+  stroke: rgba(96, 165, 250, 0.55);
+}
+
+.n8n-node--agent {
+  stroke: rgba(147, 197, 253, 0.65);
+}
+
+.n8n-node--router {
+  stroke: rgba(167, 139, 250, 0.55);
+}
+
+.n8n-node--output {
+  stroke: rgba(34, 197, 94, 0.45);
+}
+
+.n8n-node__title {
+  fill: rgba(255, 255, 255, 0.92);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.n8n-node__subtitle {
+  fill: rgba(255, 255, 255, 0.62);
+  font-size: 10.5px;
+  font-weight: 650;
+}
+
+.n8n-handle {
+  fill: rgba(255, 255, 255, 0.72);
+  stroke: rgba(0, 0, 0, 0.55);
+  stroke-width: 1;
+}
+
+.n8n-edge {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.58);
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.n8n-edge--anim {
+  stroke: rgba(96, 165, 250, 0.85);
+  stroke-width: 3.2;
+  stroke-dasharray: 10 14;
+  stroke-dashoffset: 0;
+  filter: drop-shadow(0 0 10px rgba(96, 165, 250, 0.40));
+  animation: n8n-edge-flow 2.2s linear infinite;
+  opacity: 0.95;
+  pointer-events: none;
+}
+
+.n8n-edge--dashed {
+  stroke-dasharray: 6 6;
+  opacity: 0.85;
+}
+
+.n8n-edge--dashed.n8n-edge--anim {
+  stroke: rgba(192, 132, 252, 0.78);
+  filter: drop-shadow(0 0 10px rgba(192, 132, 252, 0.35));
+  stroke-dasharray: 6 10;
+  animation-duration: 2.8s;
+}
+
+.n8n-canvas.is-paused .n8n-edge--anim {
+  animation-play-state: paused;
+  opacity: 0;
+}
+
+@keyframes n8n-edge-flow {
+  from {
+    stroke-dashoffset: 0;
+  }
+  to {
+    stroke-dashoffset: -48;
+  }
+}
+
+.n8n-orb {
+  fill: rgba(20, 24, 31, 0.92);
+  stroke: rgba(255, 255, 255, 0.18);
+  stroke-width: 1.4;
+}
+
+.n8n-orb__title {
+  fill: rgba(255, 255, 255, 0.86);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.n8n-orb__sub {
+  fill: rgba(255, 255, 255, 0.54);
+  font-size: 10px;
+  font-weight: 650;
+}
+
+.n8n-note {
+  fill: rgba(20, 24, 31, 0.92);
+  stroke: rgba(255, 255, 255, 0.14);
+  stroke-width: 1.2;
+}
+
+.n8n-note__title {
+  fill: rgba(255, 255, 255, 0.92);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.n8n-note__text {
+  fill: rgba(255, 255, 255, 0.62);
+  font-size: 10.5px;
+  font-weight: 650;
+}

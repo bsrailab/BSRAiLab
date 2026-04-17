@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
 import CopilotArchitectureDiagram from './CopilotArchitectureDiagram';
+import N8nArchitectureDiagram from './N8nArchitectureDiagram';
 import MermaidDiagram from './MermaidDiagram';
 
 function App() {
@@ -117,6 +118,35 @@ function App() {
             </div>
           </div>
         </section>
+
+        <section id="n8n">
+          <h2>n8n Workflow Automation Architecture</h2>
+          <div className="architecture-content">
+            <N8nArchitectureDiagram />
+            <div className="description">
+              <h3>Mô tả</h3>
+              <p>
+                n8n là nền tảng tự động hoá workflow (low-code). Kiến trúc điển hình gồm trigger (webhook/schedule),
+                runtime thực thi workflow, các node tích hợp (API/DB/AI), và lớp vận hành (retry, logs, queue mode).
+              </p>
+              <h3>Điểm mạnh</h3>
+              <ul>
+                <li>Dễ tích hợp: nhiều connector + HTTP node linh hoạt.</li>
+                <li>Tự host được: kiểm soát dữ liệu, mạng nội bộ, tuỳ biến.</li>
+                <li>Trực quan: kéo-thả, debug theo từng node, xem input/output.</li>
+                <li>Mở rộng: có queue mode, tách worker, scale theo tải.</li>
+              </ul>
+              <h3>Điểm yếu</h3>
+              <ul>
+                <li>Vận hành phức tạp hơn khi scale lớn (queue, DB, redis, monitoring).</li>
+                <li>Quản trị secret/credential và phân quyền cần thiết kế kỹ.</li>
+                <li>Workflow phức tạp dễ khó maintain nếu không chuẩn hoá naming/versioning.</li>
+                <li>Hiệu năng phụ thuộc mạnh vào node tự viết/cách xử lý dữ liệu trong workflow.</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
         <section id="azure-ai-foundry">
           <h2>Azure AI Foundry (Azure OpenAI) Architecture</h2>
           <div className="architecture-content">
