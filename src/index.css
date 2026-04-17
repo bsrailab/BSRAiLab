@@ -13,6 +13,29 @@
   --hero-surface: linear-gradient(135deg, #f7fbff 0%, #eef6ea 45%, #fff8ec 100%);
   --hero-shadow: 0 18px 40px rgba(23, 58, 38, 0.08);
   --card-shadow: 0 12px 32px rgba(9, 48, 27, 0.08);
+  --diagram-top: #f8fbf5;
+  --diagram-bottom: #eef6f1;
+  --diagram-card-bg: rgba(255, 255, 255, 0.92);
+  --diagram-card-border: #cbd9cf;
+  --diagram-chip-bg: rgba(12, 107, 60, 0.12);
+  --diagram-chip-text: #0c6b3c;
+  --diagram-canvas: linear-gradient(180deg, #fbfdfc 0%, #f5fbff 100%);
+  --diagram-panel-bg: rgba(255, 255, 255, 0.55);
+  --diagram-frame: #b8c8c1;
+  --diagram-badge-bg: #d8f0d6;
+  --diagram-badge-text: #1a5c32;
+  --diagram-badge-border: #8ecb96;
+  --arrow-dark: #343a40;
+  --diagram-edge-dark: #2f343a;
+  --diagram-edge-blue: #5c9df1;
+  --tooltip-bg: rgba(18, 34, 27, 0.96);
+  --tooltip-border: rgba(104, 181, 133, 0.28);
+  --tooltip-text: #eef7f1;
+  --flow-start: #16a34a;
+  --flow-end: #2563eb;
+  --flow-alt-start: #f59e0b;
+  --flow-alt-end: #06b6d4;
+  --flow-response: #7c3aed;
 }
 
 :root[data-theme='dark'] {
@@ -30,6 +53,29 @@
   --hero-surface: linear-gradient(135deg, #13211b 0%, #183126 45%, #2f2818 100%);
   --hero-shadow: 0 20px 44px rgba(0, 0, 0, 0.35);
   --card-shadow: 0 14px 36px rgba(0, 0, 0, 0.22);
+  --diagram-top: #0f1915;
+  --diagram-bottom: #13241d;
+  --diagram-card-bg: rgba(23, 34, 29, 0.92);
+  --diagram-card-border: #355043;
+  --diagram-chip-bg: rgba(77, 181, 116, 0.18);
+  --diagram-chip-text: #7de4a4;
+  --diagram-canvas: linear-gradient(180deg, #12201a 0%, #162721 100%);
+  --diagram-panel-bg: rgba(255, 255, 255, 0.04);
+  --diagram-frame: #365046;
+  --diagram-badge-bg: #214a30;
+  --diagram-badge-text: #d8f5df;
+  --diagram-badge-border: #4c8a5d;
+  --arrow-dark: #d4e0d8;
+  --diagram-edge-dark: #d4e0d8;
+  --diagram-edge-blue: #71adff;
+  --tooltip-bg: rgba(232, 241, 236, 0.98);
+  --tooltip-border: rgba(107, 139, 121, 0.36);
+  --tooltip-text: #17392f;
+  --flow-start: #4ade80;
+  --flow-end: #60a5fa;
+  --flow-alt-start: #fbbf24;
+  --flow-alt-end: #22d3ee;
+  --flow-response: #c084fc;
 }
 
 html,

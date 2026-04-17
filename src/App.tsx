@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
+import CopilotArchitectureDiagram from './CopilotArchitectureDiagram';
 import MermaidDiagram from './MermaidDiagram';
 
 function App() {
@@ -15,14 +16,6 @@ function App() {
   });
 
   const logoUrl = `${import.meta.env.BASE_URL}logoBSR.png`;
-  const copilotFlow = `
-  graph TD
-    A[User Input] --> B[Copilot Studio]
-    B --> C[Process Request]
-    C --> D[Generate Response]
-    D --> E[Output]
-  `;
-
   const azureFlow = `
   graph TD
     A[User Input] --> B[Azure AI Foundry]
@@ -89,29 +82,38 @@ function App() {
       </header>
       <main>
         <section id="copilot-studio">
-          <h2>Copilot Studio Architecture</h2>
+          <h2>Copilot Studio Enterprise Agent Architecture</h2>
           <div className="architecture-content">
-            <div className="image-placeholder">
-              <p>Placeholder for Copilot Studio Architecture Image</p>
-            </div>
+            <CopilotArchitectureDiagram />
             <div className="description">
               <h3>Mô tả</h3>
-              <p>Kiến trúc của Copilot Studio cho phép xây dựng chatbot và agents AI một cách dễ dàng với low-code approach.</p>
+              <p>
+                Kiến trúc này triển khai AI Agent/AI Chatbot doanh nghiệp trên nền
+                Microsoft 365, trong đó Copilot Studio đóng vai trò orchestration layer,
+                Azure AI Foundry xử lý RAG và sinh câu trả lời, còn Logic App cùng
+                On-premises Data Gateway mở đường truy vấn an toàn tới hệ thống nội bộ.
+              </p>
+              <h3>Luồng chạy chính</h3>
+              <ol className="flow-steps">
+                <li>Người dùng gửi câu hỏi từ Teams hoặc M365 Copilot.</li>
+                <li>Custom Engine Agent chuyển tiếp yêu cầu vào Copilot Studio để điều phối.</li>
+                <li>Copilot Studio chọn nhánh RAG hoặc nhánh truy vấn dữ liệu on-prem.</li>
+                <li>Azure AI Search và Azure OpenAI tạo câu trả lời có ngữ cảnh từ kho tri thức.</li>
+                <li>Logic App và Data Gateway truy cập database nội bộ khi cần dữ liệu nghiệp vụ.</li>
+                <li>Copilot Studio hợp nhất kết quả và trả phản hồi cuối cùng về cho người dùng.</li>
+              </ol>
               <h3>Điểm mạnh</h3>
               <ul>
-                <li>Dễ sử dụng cho người không chuyên</li>
-                <li>Tích hợp sẵn với Microsoft ecosystem</li>
-                <li>Nhanh chóng triển khai</li>
+                <li>Tận dụng trực tiếp hệ sinh thái Microsoft 365 và Copilot Studio.</li>
+                <li>Kết hợp được cả RAG tài liệu kỹ thuật và dữ liệu doanh nghiệp on-prem.</li>
+                <li>Tách bạch orchestration, AI inference và integration nên dễ mở rộng.</li>
               </ul>
               <h3>Điểm yếu</h3>
               <ul>
-                <li>Giới hạn tùy chỉnh</li>
-                <li>Phụ thuộc vào Microsoft services</li>
-                <li>Chi phí có thể cao</li>
+                <li>Phụ thuộc tương đối lớn vào hạ tầng Azure và Microsoft stack.</li>
+                <li>Thiết kế security, indexing và governance cần làm kỹ ngay từ đầu.</li>
+                <li>Chi phí tăng nhanh nếu truy vấn lớn hoặc tài liệu cần xử lý thường xuyên.</li>
               </ul>
-            </div>
-            <div className="flow-animation">
-              <MermaidDiagram chart={copilotFlow} />
             </div>
           </div>
         </section>

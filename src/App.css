@@ -117,6 +117,7 @@ section {
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 24px;
 }
 
 .image-placeholder {
@@ -132,8 +133,350 @@ section {
 
 .description {
   text-align: left;
-  max-width: 800px;
+  width: 100%;
+  max-width: 1120px;
   color: var(--text-secondary);
+}
+
+.flow-steps {
+  padding-left: 20px;
+}
+
+.flow-steps li + li {
+  margin-top: 8px;
+}
+
+.copilot-diagram {
+  position: relative;
+  display: grid;
+  grid-template-columns: 190px minmax(0, 1fr);
+  gap: 18px;
+  width: 100%;
+  background: var(--diagram-canvas);
+  border: 1px solid var(--border-soft);
+  border-radius: 22px;
+  padding: 18px;
+  box-shadow: var(--hero-shadow);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.diagram-runtime {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.diagram-runtime__path {
+  fill: none;
+  stroke-width: 1.9;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 10 8;
+  animation: diagram-path-drift 10s linear infinite;
+  opacity: 0.95;
+  filter: drop-shadow(0 0 8px rgba(96, 165, 250, 0.24));
+}
+
+.diagram-runtime__path--primary {
+  stroke: var(--flow-end);
+}
+
+.diagram-runtime__path--secondary {
+  stroke: var(--flow-alt-end);
+}
+
+.diagram-runtime__path--response {
+  stroke: var(--flow-response);
+}
+
+.diagram-runtime__label {
+  display: none;
+}
+
+.diagram-runtime__pulse--primary {
+  fill: var(--flow-end);
+  filter: drop-shadow(0 0 14px rgba(96, 165, 250, 0.62));
+}
+
+.diagram-runtime__pulse--secondary {
+  fill: var(--flow-alt-end);
+  filter: drop-shadow(0 0 14px rgba(34, 211, 238, 0.56));
+}
+
+.diagram-runtime__pulse--response {
+  fill: var(--flow-response);
+  filter: drop-shadow(0 0 14px rgba(192, 132, 252, 0.56));
+}
+
+.diagram-edge-chip {
+  position: absolute;
+  z-index: 3;
+  transform: translate(-50%, -50%);
+  padding: 4px 8px;
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1;
+  white-space: nowrap;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.16);
+  border: 1px solid transparent;
+}
+
+.diagram-edge-chip--primary {
+  background: rgba(25, 38, 49, 0.88);
+  color: #d9ecff;
+  border-color: rgba(96, 165, 250, 0.24);
+}
+
+.diagram-edge-chip--secondary {
+  background: rgba(19, 42, 43, 0.88);
+  color: #d8fbff;
+  border-color: rgba(34, 211, 238, 0.22);
+}
+
+.diagram-edge-chip--response {
+  background: rgba(39, 25, 48, 0.88);
+  color: #f0dcff;
+  border-color: rgba(192, 132, 252, 0.24);
+}
+
+@keyframes diagram-path-drift {
+  from {
+    stroke-dashoffset: 0;
+  }
+  to {
+    stroke-dashoffset: -36;
+  }
+}
+
+.diagram-rail {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  gap: 16px;
+}
+
+.diagram-panel {
+  border: 1px dashed var(--diagram-frame);
+  border-radius: 16px;
+  background: var(--diagram-panel-bg);
+  padding: 14px;
+}
+
+.diagram-panel__title {
+  margin-bottom: 14px;
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.diagram-panel__body {
+  height: calc(100% - 32px);
+  display: grid;
+  place-items: center;
+}
+
+.diagram-panel__body--future {
+  align-content: center;
+  gap: 8px;
+  text-align: center;
+  color: var(--text-secondary);
+  font-weight: 700;
+}
+
+.diagram-cloud {
+  position: relative;
+  z-index: 1;
+  border: 1px dashed var(--diagram-frame);
+  border-radius: 16px;
+  background: var(--diagram-panel-bg);
+  padding: 16px;
+  display: grid;
+  grid-template-rows: auto auto 1fr;
+  gap: 18px;
+  overflow: hidden;
+}
+
+.diagram-cloud__title {
+  color: var(--text-secondary);
+  font-size: 0.82rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.diagram-toplane {
+  display: grid;
+  grid-template-columns: 1.1fr 1.1fr 1.2fr 0.95fr;
+  align-items: center;
+  gap: 84px;
+}
+
+.diagram-mid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 110px minmax(260px, 340px);
+  gap: 18px;
+  align-items: start;
+}
+
+.diagram-lane {
+  border: 1px dashed var(--diagram-frame);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.03);
+  padding: 14px;
+  overflow: hidden;
+}
+
+.diagram-lane__title {
+  margin-bottom: 14px;
+  color: var(--text-primary);
+  font-size: 1rem;
+  font-weight: 800;
+}
+
+.diagram-lane__content {
+  display: grid;
+  gap: 18px;
+}
+
+.diagram-lane__content--db {
+  justify-items: center;
+}
+
+.diagram-lane__stack {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 144px;
+  align-items: center;
+}
+
+.diagram-ingestion {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.diagram-ingestion__item {
+  display: grid;
+}
+
+.diagram-firewall {
+  align-self: center;
+  justify-self: center;
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  font-weight: 800;
+  line-height: 1.3;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.diagram-node {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  justify-items: center;
+  align-content: center;
+  gap: 6px;
+  min-height: 70px;
+  padding: 8px 7px;
+  border-radius: 10px;
+  border: 1px solid var(--diagram-card-border);
+  background: var(--diagram-card-bg);
+  box-shadow: var(--card-shadow);
+  color: var(--text-primary);
+  cursor: default;
+  transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+}
+
+.diagram-node:hover,
+.diagram-node:focus-within {
+  transform: translateY(-2px);
+  border-color: var(--accent);
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.16);
+}
+
+.diagram-node__badge {
+  position: absolute;
+  top: -8px;
+  left: -8px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--diagram-badge-bg);
+  color: var(--diagram-badge-text);
+  border: 1px solid var(--diagram-badge-border);
+  font-size: 0.72rem;
+  font-weight: 800;
+}
+
+.diagram-node__icon {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 9px;
+  background: var(--diagram-chip-bg);
+  color: var(--diagram-chip-text);
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.diagram-node__label {
+  text-align: center;
+  font-size: 0.74rem;
+  font-weight: 700;
+  line-height: 1.15;
+}
+
+.diagram-node__tooltip {
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 12px);
+  width: 230px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: var(--tooltip-bg);
+  border: 1px solid var(--tooltip-border);
+  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.22);
+  color: var(--tooltip-text);
+  font-size: 0.84rem;
+  line-height: 1.5;
+  text-align: left;
+  transform: translateX(-50%) translateY(6px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 160ms ease, transform 160ms ease;
+  z-index: 5;
+}
+
+.diagram-node__tooltip::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  width: 12px;
+  height: 12px;
+  background: var(--tooltip-bg);
+  border-right: 1px solid var(--tooltip-border);
+  border-bottom: 1px solid var(--tooltip-border);
+  transform: translateX(-50%) rotate(45deg);
+}
+
+.diagram-node:hover .diagram-node__tooltip,
+.diagram-node:focus-within .diagram-node__tooltip {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
 }
 
 .flow-animation {
@@ -216,4 +559,227 @@ th {
   .hero-intro {
     grid-template-columns: 1fr;
   }
+
+  .copilot-diagram {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .diagram-mid,
+  .diagram-toplane,
+  .diagram-ingestion,
+  .diagram-lane__stack {
+    grid-template-columns: 1fr;
+  }
+
+  .diagram-mid {
+    gap: 12px;
+  }
+
+  .diagram-runtime {
+    display: none;
+  }
+
+  .diagram-edge-chip {
+    display: none;
+  }
+
+  .diagram-node__tooltip {
+    position: static;
+    width: auto;
+    margin-top: 4px;
+    transform: none;
+    opacity: 1;
+    pointer-events: auto;
+    box-shadow: none;
+    background: transparent;
+    border: 0;
+    padding: 0;
+    color: var(--text-secondary);
+    text-align: center;
+  }
+
+  .diagram-node__tooltip::after {
+    display: none;
+  }
+}
+
+.enterprise-diagram {
+  --enterprise-text-primary: #102a24;
+  --enterprise-text-secondary: #4e655d;
+  --enterprise-border-soft: #d9e4dd;
+  --enterprise-canvas: linear-gradient(180deg, #fbfdfc 0%, #f4f8ff 100%);
+  --enterprise-card-bg: rgba(255, 255, 255, 0.96);
+  --enterprise-card-border: #b8ccdc;
+  --enterprise-chip-bg: rgba(21, 128, 61, 0.12);
+  --enterprise-chip-text: #15803d;
+  --enterprise-frame: #9dbbdd;
+  --enterprise-badge-bg: #dff2d2;
+  --enterprise-badge-text: #25512a;
+  --enterprise-badge-border: #7eb46f;
+  --enterprise-edge-dark: #2b2f33;
+  --enterprise-edge-blue: #5c93e6;
+  --enterprise-edge-violet: #8a63d2;
+  --enterprise-shadow: 0 18px 40px rgba(23, 58, 38, 0.08);
+  width: 100%;
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid var(--enterprise-border-soft);
+  background: var(--enterprise-canvas);
+  box-shadow: var(--enterprise-shadow);
+}
+
+.enterprise-diagram__svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.enterprise-diagram__cloud-frame {
+  stroke: var(--enterprise-frame);
+  stroke-width: 1.5;
+  stroke-dasharray: 4 4;
+}
+
+.enterprise-diagram__zone-title {
+  fill: #1c2d2a;
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+}
+
+.enterprise-diagram__section-title {
+  fill: var(--enterprise-text-primary);
+  font-size: 17px;
+  font-weight: 800;
+}
+
+.enterprise-diagram__firewall {
+  fill: var(--enterprise-text-primary);
+  font-size: 18px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.enterprise-diagram__divider {
+  stroke: var(--enterprise-frame);
+  stroke-width: 2.2;
+  stroke-dasharray: 4 4;
+}
+
+.enterprise-diagram__side-panel {
+  fill: #fff;
+  stroke: #7c8a84;
+  stroke-width: 1.4;
+  stroke-dasharray: 4 4;
+}
+
+.enterprise-diagram__card {
+  fill: var(--enterprise-card-bg);
+  stroke: var(--enterprise-card-border);
+  stroke-width: 1.4;
+}
+
+.enterprise-diagram__card--blue {
+  fill: rgba(196, 224, 255, 0.95);
+  stroke: #78a8d7;
+}
+
+.enterprise-diagram__inner-pill {
+  fill: rgba(255, 255, 255, 0.94);
+  stroke: #8fb0c8;
+  stroke-width: 1.3;
+}
+
+.enterprise-diagram__icon-chip {
+  fill: var(--enterprise-chip-bg);
+}
+
+.enterprise-diagram__icon-chip-text {
+  fill: var(--enterprise-chip-text);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.enterprise-diagram__card-title {
+  fill: var(--enterprise-text-primary);
+  font-size: 16px;
+  font-weight: 800;
+}
+
+.enterprise-diagram__card-title--compact {
+  font-size: 12.5px;
+}
+
+.enterprise-diagram__card-subtitle,
+.enterprise-diagram__side-subtitle,
+.enterprise-diagram__db-label {
+  fill: var(--enterprise-text-secondary);
+  font-size: 12px;
+  font-weight: 650;
+}
+
+.enterprise-diagram__inner-pill-text,
+.enterprise-diagram__side-title {
+  fill: var(--enterprise-text-primary);
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.enterprise-diagram__inner-pill-text {
+  font-size: 13px;
+}
+
+.enterprise-diagram__badge-circle {
+  fill: var(--enterprise-badge-bg);
+  stroke: var(--enterprise-badge-border);
+  stroke-width: 1.5;
+}
+
+.enterprise-diagram__badge-text {
+  fill: var(--enterprise-badge-text);
+  font-size: 16px;
+  font-weight: 800;
+}
+
+.enterprise-diagram__edge {
+  fill: none;
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.enterprise-diagram__edge--dark {
+  stroke: var(--enterprise-edge-dark);
+}
+
+.enterprise-diagram__edge--blue {
+  stroke: var(--enterprise-edge-blue);
+}
+
+.enterprise-diagram__edge--violet {
+  stroke: var(--enterprise-edge-violet);
+  stroke-dasharray: 8 7;
+}
+
+.enterprise-diagram__label-chip {
+  fill: rgba(255, 255, 255, 0.76);
+}
+
+.enterprise-diagram__edge-label {
+  fill: #23313a;
+  font-size: 10.5px;
+  font-weight: 700;
+}
+
+.enterprise-diagram__lane-title {
+  fill: var(--enterprise-text-primary);
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.enterprise-diagram__footer-title {
+  fill: var(--enterprise-text-primary);
+  font-size: 14px;
+  font-weight: 800;
 }
