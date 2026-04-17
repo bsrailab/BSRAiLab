@@ -250,9 +250,9 @@ const CopilotArchitectureDiagram: React.FC = () => {
   const nodes: CardProps[] = [
     // Top row
     { id: 'teams', x: 260, y: 118, width: 300, height: 56, title: 'Microsoft Teams / M365 Copilot', iconText: 'M365' },
-    { id: 'agent', x: 280, y: 196, width: 260, height: 78, title: 'Custom Engine Agent', subtitle: '(Custom Copilot)' },
+    { id: 'agent', x: 280, y: 208, width: 260, height: 78, title: 'Custom Engine Agent', subtitle: '(Custom Copilot)' },
     { id: 'studio', x: 630, y: 190, width: 320, height: 82, title: 'Microsoft Copilot Studio', subtitle: '(Orchestrator & Gateway)' },
-    { id: 'logic', x: 990, y: 238, width: 220, height: 86, title: 'Azure Logic App', subtitle: '(Custom Action)' },
+    { id: 'logic', x: 990, y: 252, width: 220, height: 86, title: 'Azure Logic App', subtitle: '(Custom Action)' },
 
     // RAG path
     { id: 'foundry', x: 560, y: 318, width: 280, height: 88, title: 'Azure AI Foundry', subtitle: 'Azure OpenAI Service', iconText: 'AI', variant: 'blue' },
@@ -271,20 +271,21 @@ const CopilotArchitectureDiagram: React.FC = () => {
     // Step 1: user -> Teams (route to header row, not through cards)
     // Keep the whole arrow inside the cloud frame (cloud starts at x=240).
     { id: 'user-to-teams', d: 'M 240 150 L 260 150', tone: 'dark', endMarker: true, step: 1 },
-    { id: 'teams-to-agent', d: 'M 410 174 L 410 196', tone: 'dark', endMarker: true, step: 2 },
-    { id: 'agent-to-studio', d: 'M 540 235 L 630 235', tone: 'dark', endMarker: true, label: { x: 585, y: 275, lines: ['3. Chunking', '& answers'], anchor: 'middle' }, step: 3 },
+    { id: 'teams-to-agent', d: 'M 410 174 L 410 208', tone: 'dark', endMarker: true, step: 2 },
+    { id: 'agent-to-studio', d: 'M 540 247 L 630 247', tone: 'dark', endMarker: true, label: { x: 585, y: 289, lines: ['3. Chunking', '& answers'], anchor: 'middle' }, step: 3 },
     { id: 'studio-to-foundry', d: 'M 790 272 L 790 318', tone: 'blue', endMarker: true, label: { x: 810, y: 314, lines: ['3. Xử lý RAG'], anchor: 'start' }, step: 3 },
     { id: 'foundry-to-search', d: 'M 700 406 L 700 450', tone: 'blue', endMarker: true, step: 3 },
     // Ingestion sources -> Search (merge into a junction, then connect to Search)
     { id: 'etl-to-search', d: 'M 540 461 L 520 461 L 520 483 L 560 483', tone: 'dark', endMarker: true },
     { id: 'doc-to-search', d: 'M 540 536 L 520 536 L 520 483', tone: 'dark', endMarker: true },
     { id: 'blob-to-search', d: 'M 540 611 L 520 611 L 520 483', tone: 'dark', endMarker: true },
-    { id: 'studio-to-logic', d: 'M 950 230 L 1050 230 L 1050 238', tone: 'dark', endMarker: true, label: { x: 1010, y: 206, lines: ['4. Gọi API/Flow'], anchor: 'middle' }, step: 4 },
-    { id: 'logic-to-gateway', d: 'M 1100 324 L 1100 410', tone: 'dark', endMarker: true, label: { x: 1126, y: 392, lines: ['5. Kết nối bảo mật'], anchor: 'start' }, step: 5 },
+    // Route into Logic App center-top (logic: x=990..1210, y=238)
+    { id: 'studio-to-logic', d: 'M 950 230 L 1100 230 L 1100 252', tone: 'dark', endMarker: true, label: { x: 1038, y: 206, lines: ['4. Gọi API/Flow'], anchor: 'middle' }, step: 4 },
+    { id: 'logic-to-gateway', d: 'M 1100 338 L 1100 410', tone: 'dark', endMarker: true, label: { x: 1126, y: 398, lines: ['5. Kết nối bảo mật'], anchor: 'start' }, step: 5 },
     { id: 'gateway-to-db', d: 'M 1100 474 L 1100 520', tone: 'dark', startMarker: true, endMarker: true, step: 5 },
     // Step 6: keep the return arrow straight
-    { id: 'studio-to-agent', d: 'M 630 206 L 540 206', tone: 'dark', endMarker: true, label: { x: 585, y: 182, lines: ['6. Trả lời'], anchor: 'middle' }, step: 6 },
-    { id: 'agent-to-teams', d: 'M 410 196 L 410 174', tone: 'dark', endMarker: true, step: 6 },
+    { id: 'studio-to-agent', d: 'M 630 218 L 540 218', tone: 'dark', endMarker: true, label: { x: 585, y: 194, lines: ['6. Trả lời'], anchor: 'middle' }, step: 6 },
+    { id: 'agent-to-teams', d: 'M 410 208 L 410 174', tone: 'dark', endMarker: true, step: 6 },
   ];
 
   return (
