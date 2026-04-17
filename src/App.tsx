@@ -3,6 +3,7 @@ import './App.css';
 import MermaidDiagram from './MermaidDiagram';
 
 function App() {
+  const logoUrl = `${import.meta.env.BASE_URL}logoBSR.png`;
   const copilotFlow = `
   graph TD
     A[User Input] --> B[Copilot Studio]
@@ -29,8 +30,36 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>BSR AI Architecture Showcase</h1>
-        <p>Tổng hợp và so sánh các kiến trúc AI</p>
+        <div className="hero-brand">
+          <img src={logoUrl} alt="BSR AI Lab logo" className="hero-logo" />
+          <div className="hero-copy">
+            <span className="hero-kicker">BSR AI Lab</span>
+            <h1>Trung tâm thúc đẩy các dự án AI, ML và DL cho IDT</h1>
+            <p>
+              BSR AI Lab phục vụ phát triển các dự án liên quan đến AI, Machine Learning
+              và Deep Learning của Ban Công nghệ thông tin và Chuyển đổi số (IDT) thuộc
+              Tổng Công ty Lọc hóa dầu Việt Nam.
+            </p>
+          </div>
+        </div>
+        <div className="hero-intro">
+          <div className="hero-card">
+            <h2>Thông tin đơn vị</h2>
+            <p>
+              Ban Công nghệ thông tin và Chuyển đổi số hiện có 34 nhân sự, tập trung vào
+              xây dựng năng lực số, nền tảng dữ liệu và các sáng kiến ứng dụng AI phục vụ
+              sản xuất kinh doanh.
+            </p>
+          </div>
+          <div className="hero-card">
+            <h2>Ban lãnh đạo</h2>
+            <ul>
+              <li>Trưởng ban: Ông Đặng Minh Tuấn</li>
+              <li>Phó ban: Ông Trần Thanh Lâm</li>
+              <li>Phó ban: Ông Nguyễn Đức Huy Bảo</li>
+            </ul>
+          </div>
+        </div>
       </header>
       <main>
         <section id="copilot-studio">
