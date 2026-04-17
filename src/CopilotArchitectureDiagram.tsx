@@ -325,11 +325,11 @@ const CopilotArchitectureDiagram: React.FC = () => {
         >
           <defs>
             <linearGradient id="copilotCloud" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stopColor="#eef7ff" />
-              <stop offset="100%" stopColor="#ffffff" />
+              <stop offset="0%" stopColor="var(--enterprise-cloud-a)" />
+              <stop offset="100%" stopColor="var(--enterprise-cloud-b)" />
             </linearGradient>
             <marker id="copilotArrow" viewBox="0 0 10 10" refX="7.2" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
-              <path d="M 0 0 L 10 5 L 0 10 z" fill="#1f2a33" />
+              <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--arrow-dark)" />
             </marker>
           </defs>
 

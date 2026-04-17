@@ -637,6 +637,8 @@ th {
   --enterprise-text-secondary: #4e655d;
   --enterprise-border-soft: #d9e4dd;
   --enterprise-canvas: linear-gradient(180deg, #fbfdfc 0%, #f4f8ff 100%);
+  --enterprise-cloud-a: #eef7ff;
+  --enterprise-cloud-b: #ffffff;
   --enterprise-card-bg: rgba(255, 255, 255, 0.96);
   --enterprise-card-border: #b8ccdc;
   --enterprise-chip-bg: rgba(21, 128, 61, 0.12);
@@ -655,6 +657,28 @@ th {
   border: 1px solid var(--enterprise-border-soft);
   background: var(--enterprise-canvas);
   box-shadow: var(--enterprise-shadow);
+}
+
+:root[data-theme='dark'] .enterprise-diagram,
+.App[data-theme='dark'] .enterprise-diagram {
+  --enterprise-text-primary: rgba(230, 241, 234, 0.92);
+  --enterprise-text-secondary: rgba(189, 209, 197, 0.82);
+  --enterprise-border-soft: rgba(58, 76, 66, 0.85);
+  --enterprise-canvas: linear-gradient(180deg, #12201a 0%, #162721 100%);
+  --enterprise-cloud-a: #0f1915;
+  --enterprise-cloud-b: #13241d;
+  --enterprise-card-bg: rgba(23, 34, 29, 0.94);
+  --enterprise-card-border: rgba(53, 80, 67, 0.95);
+  --enterprise-chip-bg: rgba(77, 181, 116, 0.18);
+  --enterprise-chip-text: #7de4a4;
+  --enterprise-frame: rgba(54, 80, 70, 0.95);
+  --enterprise-badge-bg: #214a30;
+  --enterprise-badge-text: #d8f5df;
+  --enterprise-badge-border: #4c8a5d;
+  --enterprise-edge-dark: rgba(212, 224, 216, 0.86);
+  --enterprise-edge-blue: rgba(113, 173, 255, 0.92);
+  --enterprise-edge-violet: rgba(192, 132, 252, 0.85);
+  --enterprise-shadow: 0 20px 44px rgba(0, 0, 0, 0.35);
 }
 
 .enterprise-diagram__svg {
@@ -703,6 +727,12 @@ th {
   stroke-dasharray: 4 4;
 }
 
+:root[data-theme='dark'] .enterprise-diagram__side-panel,
+.App[data-theme='dark'] .enterprise-diagram__side-panel {
+  fill: rgba(12, 18, 15, 0.55);
+  stroke: rgba(212, 224, 216, 0.22);
+}
+
 .enterprise-diagram__card {
   fill: var(--enterprise-card-bg);
   stroke: var(--enterprise-card-border);
@@ -714,10 +744,22 @@ th {
   stroke: #78a8d7;
 }
 
+:root[data-theme='dark'] .enterprise-diagram__card--blue,
+.App[data-theme='dark'] .enterprise-diagram__card--blue {
+  fill: rgba(30, 58, 92, 0.55);
+  stroke: rgba(113, 173, 255, 0.42);
+}
+
 .enterprise-diagram__inner-pill {
   fill: rgba(255, 255, 255, 0.94);
   stroke: #8fb0c8;
   stroke-width: 1.3;
+}
+
+:root[data-theme='dark'] .enterprise-diagram__inner-pill,
+.App[data-theme='dark'] .enterprise-diagram__inner-pill {
+  fill: rgba(23, 34, 29, 0.92);
+  stroke: rgba(53, 80, 67, 0.9);
 }
 
 .enterprise-diagram__icon-chip {
@@ -795,10 +837,20 @@ th {
   fill: rgba(255, 255, 255, 0.76);
 }
 
+:root[data-theme='dark'] .enterprise-diagram__label-chip,
+.App[data-theme='dark'] .enterprise-diagram__label-chip {
+  fill: rgba(15, 23, 20, 0.72);
+}
+
 .enterprise-diagram__edge-label {
   fill: #23313a;
   font-size: 10.5px;
   font-weight: 700;
+}
+
+:root[data-theme='dark'] .enterprise-diagram__edge-label,
+.App[data-theme='dark'] .enterprise-diagram__edge-label {
+  fill: rgba(230, 241, 234, 0.88);
 }
 
 .enterprise-diagram__lane-title {
@@ -877,6 +929,11 @@ th {
   stroke-dasharray: 4 4;
 }
 
+:root[data-theme='dark'] .copilot-diagram__cloud-frame,
+.App[data-theme='dark'] .copilot-diagram__cloud-frame {
+  stroke: rgba(212, 224, 216, 0.24);
+}
+
 .copilot-diagram__zone-title {
   fill: var(--text-primary);
   font-size: 14px;
@@ -889,11 +946,22 @@ th {
   stroke-dasharray: 4 4;
 }
 
+:root[data-theme='dark'] .copilot-diagram__divider,
+.App[data-theme='dark'] .copilot-diagram__divider {
+  stroke: rgba(212, 224, 216, 0.18);
+}
+
 .copilot-diagram__side-panel {
   fill: rgba(255, 255, 255, 0.92);
   stroke: rgba(120, 140, 150, 0.85);
   stroke-width: 1.2;
   stroke-dasharray: 4 4;
+}
+
+:root[data-theme='dark'] .copilot-diagram__side-panel,
+.App[data-theme='dark'] .copilot-diagram__side-panel {
+  fill: rgba(12, 18, 15, 0.55);
+  stroke: rgba(212, 224, 216, 0.22);
 }
 
 .copilot-diagram__panel-title {
@@ -950,9 +1018,22 @@ th {
   filter: drop-shadow(0 10px 24px rgba(0, 0, 0, 0.10));
 }
 
+:root[data-theme='dark'] .copilot-diagram__card,
+.App[data-theme='dark'] .copilot-diagram__card {
+  fill: rgba(23, 34, 29, 0.92);
+  stroke: rgba(53, 80, 67, 0.95);
+  filter: drop-shadow(0 14px 30px rgba(0, 0, 0, 0.35));
+}
+
 .copilot-diagram__card--blue {
   fill: #cfe5ff;
   stroke: rgba(95, 150, 205, 0.95);
+}
+
+:root[data-theme='dark'] .copilot-diagram__card--blue,
+.App[data-theme='dark'] .copilot-diagram__card--blue {
+  fill: rgba(30, 58, 92, 0.55);
+  stroke: rgba(113, 173, 255, 0.42);
 }
 
 .copilot-diagram__card--green {
@@ -960,8 +1041,19 @@ th {
   stroke: rgba(34, 197, 94, 0.50);
 }
 
+:root[data-theme='dark'] .copilot-diagram__card--green,
+.App[data-theme='dark'] .copilot-diagram__card--green {
+  fill: rgba(20, 46, 32, 0.55);
+  stroke: rgba(74, 222, 128, 0.35);
+}
+
 .copilot-diagram__chip {
   fill: rgba(12, 107, 60, 0.12);
+}
+
+:root[data-theme='dark'] .copilot-diagram__chip,
+.App[data-theme='dark'] .copilot-diagram__chip {
+  fill: rgba(77, 181, 116, 0.18);
 }
 
 .copilot-diagram__chip-text {
@@ -997,8 +1089,18 @@ th {
   stroke: rgba(31, 42, 51, 0.82);
 }
 
+:root[data-theme='dark'] .copilot-diagram__edge--dark,
+.App[data-theme='dark'] .copilot-diagram__edge--dark {
+  stroke: rgba(212, 224, 216, 0.70);
+}
+
 .copilot-diagram__edge--blue {
   stroke: rgba(37, 99, 235, 0.82);
+}
+
+:root[data-theme='dark'] .copilot-diagram__edge--blue,
+.App[data-theme='dark'] .copilot-diagram__edge--blue {
+  stroke: rgba(113, 173, 255, 0.82);
 }
 
 .copilot-diagram__edge-glow {
@@ -1045,10 +1147,21 @@ th {
   stroke-width: 1;
 }
 
+:root[data-theme='dark'] .copilot-diagram__label-chip,
+.App[data-theme='dark'] .copilot-diagram__label-chip {
+  fill: rgba(15, 23, 20, 0.72);
+  stroke: rgba(212, 224, 216, 0.20);
+}
+
 .copilot-diagram__label-text {
   fill: rgba(31, 42, 51, 0.92);
   font-size: 9.5px;
   font-weight: 800;
+}
+
+:root[data-theme='dark'] .copilot-diagram__label-text,
+.App[data-theme='dark'] .copilot-diagram__label-text {
+  fill: rgba(230, 241, 234, 0.88);
 }
 
 .copilot-diagram__overlays {
@@ -1091,12 +1204,51 @@ th {
 
 /* n8n-style dark canvas */
 .n8n-canvas {
+  --n8n-bg: #0b0f14;
+  --n8n-frame-stroke: rgba(255, 255, 255, 0.10);
+  --n8n-grid-dot-strong: rgba(255, 255, 255, 0.10);
+  --n8n-grid-dot-soft: rgba(255, 255, 255, 0.08);
+  --n8n-title: rgba(255, 255, 255, 0.86);
+  --n8n-node-bg: rgba(20, 24, 31, 0.96);
+  --n8n-node-stroke: rgba(255, 255, 255, 0.18);
+  --n8n-text-strong: rgba(255, 255, 255, 0.92);
+  --n8n-text-soft: rgba(255, 255, 255, 0.62);
+  --n8n-handle: rgba(255, 255, 255, 0.72);
+  --n8n-edge: rgba(255, 255, 255, 0.58);
+  --n8n-edge-anim: rgba(96, 165, 250, 0.85);
+  --n8n-edge-anim-glow: rgba(96, 165, 250, 0.40);
+  --n8n-edge-dashed-anim: rgba(192, 132, 252, 0.78);
+  --n8n-edge-dashed-anim-glow: rgba(192, 132, 252, 0.35);
+  --n8n-arrow: rgba(255, 255, 255, 0.72);
+
   width: 100%;
   border-radius: 18px;
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.08);
-  background: #0b0f14;
+  background: var(--n8n-bg);
   box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+}
+
+.App[data-theme='light'] .n8n-canvas,
+:root[data-theme='light'] .n8n-canvas {
+  --n8n-bg: #f7fafc;
+  --n8n-frame-stroke: rgba(15, 23, 42, 0.10);
+  --n8n-grid-dot-strong: rgba(15, 23, 42, 0.10);
+  --n8n-grid-dot-soft: rgba(15, 23, 42, 0.06);
+  --n8n-title: rgba(15, 23, 42, 0.82);
+  --n8n-node-bg: rgba(255, 255, 255, 0.96);
+  --n8n-node-stroke: rgba(15, 23, 42, 0.18);
+  --n8n-text-strong: rgba(15, 23, 42, 0.92);
+  --n8n-text-soft: rgba(15, 23, 42, 0.62);
+  --n8n-handle: rgba(15, 23, 42, 0.72);
+  --n8n-edge: rgba(15, 23, 42, 0.50);
+  --n8n-edge-anim: rgba(37, 99, 235, 0.85);
+  --n8n-edge-anim-glow: rgba(37, 99, 235, 0.20);
+  --n8n-edge-dashed-anim: rgba(124, 58, 237, 0.78);
+  --n8n-edge-dashed-anim-glow: rgba(124, 58, 237, 0.18);
+  --n8n-arrow: rgba(15, 23, 42, 0.72);
+  border: 1px solid rgba(15, 23, 42, 0.10);
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.10);
 }
 
 .n8n-canvas__svg {
@@ -1107,23 +1259,28 @@ th {
 }
 
 .n8n-canvas__frame {
-  fill: #0b0f14;
-  stroke: rgba(255, 255, 255, 0.10);
+  fill: var(--n8n-bg);
+  stroke: var(--n8n-frame-stroke);
   stroke-width: 1.2;
 }
 
 .n8n-canvas__title {
-  fill: rgba(255, 255, 255, 0.86);
+  fill: var(--n8n-title);
   font-size: 14px;
   font-weight: 800;
   letter-spacing: 0.06em;
 }
 
 .n8n-node {
-  fill: rgba(20, 24, 31, 0.96);
-  stroke: rgba(255, 255, 255, 0.18);
+  fill: var(--n8n-node-bg);
+  stroke: var(--n8n-node-stroke);
   stroke-width: 1.4;
   filter: drop-shadow(0 14px 28px rgba(0, 0, 0, 0.45));
+}
+
+.App[data-theme='light'] .n8n-node,
+:root[data-theme='light'] .n8n-node {
+  filter: drop-shadow(0 14px 28px rgba(15, 23, 42, 0.10));
 }
 
 .n8n-node--trigger {
@@ -1147,37 +1304,37 @@ th {
 }
 
 .n8n-node__title {
-  fill: rgba(255, 255, 255, 0.92);
+  fill: var(--n8n-text-strong);
   font-size: 13px;
   font-weight: 800;
 }
 
 .n8n-node__subtitle {
-  fill: rgba(255, 255, 255, 0.62);
+  fill: var(--n8n-text-soft);
   font-size: 10.5px;
   font-weight: 650;
 }
 
 .n8n-handle {
-  fill: rgba(255, 255, 255, 0.72);
+  fill: var(--n8n-handle);
   stroke: rgba(0, 0, 0, 0.55);
   stroke-width: 1;
 }
 
 .n8n-edge {
   fill: none;
-  stroke: rgba(255, 255, 255, 0.58);
+  stroke: var(--n8n-edge);
   stroke-width: 2.2;
   stroke-linecap: round;
   stroke-linejoin: round;
 }
 
 .n8n-edge--anim {
-  stroke: rgba(96, 165, 250, 0.85);
+  stroke: var(--n8n-edge-anim);
   stroke-width: 3.2;
   stroke-dasharray: 10 14;
   stroke-dashoffset: 0;
-  filter: drop-shadow(0 0 10px rgba(96, 165, 250, 0.40));
+  filter: drop-shadow(0 0 10px var(--n8n-edge-anim-glow));
   animation: n8n-edge-flow 2.2s linear infinite;
   opacity: 0.95;
   pointer-events: none;
@@ -1189,8 +1346,8 @@ th {
 }
 
 .n8n-edge--dashed.n8n-edge--anim {
-  stroke: rgba(192, 132, 252, 0.78);
-  filter: drop-shadow(0 0 10px rgba(192, 132, 252, 0.35));
+  stroke: var(--n8n-edge-dashed-anim);
+  filter: drop-shadow(0 0 10px var(--n8n-edge-dashed-anim-glow));
   stroke-dasharray: 6 10;
   animation-duration: 2.8s;
 }
@@ -1210,37 +1367,37 @@ th {
 }
 
 .n8n-orb {
-  fill: rgba(20, 24, 31, 0.92);
-  stroke: rgba(255, 255, 255, 0.18);
+  fill: color-mix(in srgb, var(--n8n-node-bg) 95%, transparent);
+  stroke: var(--n8n-node-stroke);
   stroke-width: 1.4;
 }
 
 .n8n-orb__title {
-  fill: rgba(255, 255, 255, 0.86);
+  fill: color-mix(in srgb, var(--n8n-text-strong) 92%, transparent);
   font-size: 12px;
   font-weight: 800;
 }
 
 .n8n-orb__sub {
-  fill: rgba(255, 255, 255, 0.54);
+  fill: color-mix(in srgb, var(--n8n-text-soft) 92%, transparent);
   font-size: 10px;
   font-weight: 650;
 }
 
 .n8n-note {
-  fill: rgba(20, 24, 31, 0.92);
-  stroke: rgba(255, 255, 255, 0.14);
+  fill: color-mix(in srgb, var(--n8n-node-bg) 94%, transparent);
+  stroke: color-mix(in srgb, var(--n8n-node-stroke) 80%, transparent);
   stroke-width: 1.2;
 }
 
 .n8n-note__title {
-  fill: rgba(255, 255, 255, 0.92);
+  fill: var(--n8n-text-strong);
   font-size: 12px;
   font-weight: 800;
 }
 
 .n8n-note__text {
-  fill: rgba(255, 255, 255, 0.62);
+  fill: var(--n8n-text-soft);
   font-size: 10.5px;
   font-weight: 650;
 }

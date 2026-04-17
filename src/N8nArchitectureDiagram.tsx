@@ -251,14 +251,14 @@ const N8nArchitectureDiagram: React.FC = () => {
         <svg className="n8n-canvas__svg" viewBox="0 0 1260 820" preserveAspectRatio="xMidYMid meet" role="img" aria-label="n8n workflow diagram">
           <defs>
             <pattern id="n8nGrid" width="26" height="26" patternUnits="userSpaceOnUse">
-              <circle cx="1" cy="1" r="1.05" fill="rgba(255,255,255,0.10)" />
-              <circle cx="14" cy="14" r="1" fill="rgba(255,255,255,0.08)" />
+              <circle cx="1" cy="1" r="1.05" fill="var(--n8n-grid-dot-strong)" />
+              <circle cx="14" cy="14" r="1" fill="var(--n8n-grid-dot-soft)" />
             </pattern>
             <marker id="copilotArrow" viewBox="0 0 10 10" refX="7.2" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
               <path d="M 0 0 L 10 5 L 0 10 z" fill="#1f2a33" />
             </marker>
             <marker id="n8nArrow" viewBox="0 0 10 10" refX="7.5" refY="5" markerWidth="7.2" markerHeight="7.2" orient="auto">
-              <path d="M 0 0 L 10 5 L 0 10 z" fill="rgba(255,255,255,0.72)" />
+              <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--n8n-arrow)" />
             </marker>
           </defs>
 
