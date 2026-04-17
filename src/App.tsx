@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './App.css';
 import CopilotArchitectureDiagram from './CopilotArchitectureDiagram';
 import N8nArchitectureDiagram from './N8nArchitectureDiagram';
-import MermaidDiagram from './MermaidDiagram';
+import BSRAgentArchitectureDiagram from './BSRAgentArchitectureDiagram';
 
 function App() {
   const [theme, setTheme] = useState<'light' | 'dark'>(() => {
@@ -17,20 +17,6 @@ function App() {
   });
 
   const logoUrl = `${import.meta.env.BASE_URL}logoBSR.png`;
-  const azureFlow = `
-  graph TD
-    A[User Input] --> B[Azure AI Foundry]
-    B --> C[OpenAI Models]
-    C --> D[Process & Enhance]
-    D --> E[Response]
-  `;
-
-  const customFlow = `
-  graph TD
-    A[Input] --> B[Custom Logic]
-    B --> C[AI Processing]
-    C --> D[Output]
-  `;
 
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
@@ -147,60 +133,35 @@ function App() {
           </div>
         </section>
 
-        <section id="azure-ai-foundry">
-          <h2>Azure AI Foundry (Azure OpenAI) Architecture</h2>
+        <section id="bsragent">
+          <h2>BSRAgent Architecture</h2>
           <div className="architecture-content">
-            <div className="image-placeholder">
-              <p>Placeholder for Azure AI Foundry Architecture Image</p>
-            </div>
+            <BSRAgentArchitectureDiagram />
             <div className="description">
               <h3>Mô tả</h3>
-              <p>Azure AI Foundry cung cấp nền tảng để xây dựng, triển khai và quản lý các mô hình AI, đặc biệt là OpenAI models.</p>
+              <p>
+                BSRAgent là framework agent ưu tiên terminal (CLI-first) với session persistence (SQLite),
+                tool calling theo schema, routing theo capability, quan sát có cấu trúc (JSONL/metrics/tracing),
+                và có thể mở HTTP API (FastAPI) cho automation nội bộ.
+              </p>
               <h3>Điểm mạnh</h3>
               <ul>
-                <li>Truy cập vào các mô hình tiên tiến</li>
-                <li>Tích hợp mạnh mẽ với Azure services</li>
-                <li>Khả năng scale cao</li>
+                <li>CLI-first + Rich UX: triển khai nhanh, dễ dùng nội bộ.</li>
+                <li>Tool calling rõ ràng (schema) + guard rails (risk_level/confirmation).</li>
+                <li>Multi-agent supervisor + routing theo capability.</li>
+                <li>Observability tốt: session events, tool calls, metrics, tracing.</li>
+                <li>Tích hợp RAG qua LightRAG tools; tích hợp hệ thống (SAP/internal tools).</li>
               </ul>
               <h3>Điểm yếu</h3>
               <ul>
-                <li>Yêu cầu kiến thức kỹ thuật</li>
-                <li>Chi phí phức tạp</li>
-                <li>Phụ thuộc vào Azure</li>
+                <li>UI web không phải trọng tâm (thiên về CLI); cần thêm lớp UI nếu muốn end-user scale lớn.</li>
+                <li>Vận hành API/Auth (Azure AD/API key) cần cấu hình và quản trị.</li>
+                <li>Phụ thuộc chất lượng tool/plugin và kỷ luật chuẩn hoá capability/policy để tránh “agent sprawl”.</li>
               </ul>
-            </div>
-            <div className="flow-animation">
-              <MermaidDiagram chart={azureFlow} />
             </div>
           </div>
         </section>
-        <section id="custom-project">
-          <h2>Custom Project Architecture</h2>
-          <div className="architecture-content">
-            <div className="image-placeholder">
-              <p>Placeholder for Custom Project Architecture Image</p>
-            </div>
-            <div className="description">
-              <h3>Mô tả</h3>
-              <p>Kiến trúc tùy chỉnh được thiết kế riêng cho dự án cụ thể, cho phép tối ưu hóa theo nhu cầu.</p>
-              <h3>Điểm mạnh</h3>
-              <ul>
-                <li>Tùy chỉnh hoàn toàn</li>
-                <li>Tối ưu hiệu suất</li>
-                <li>Không phụ thuộc vendor</li>
-              </ul>
-              <h3>Điểm yếu</h3>
-              <ul>
-                <li>Yêu cầu đội ngũ chuyên môn</li>
-                <li>Thời gian phát triển lâu</li>
-                <li>Chi phí ban đầu cao</li>
-              </ul>
-            </div>
-            <div className="flow-animation">
-              <MermaidDiagram chart={customFlow} />
-            </div>
-          </div>
-        </section>
+
         <section id="comparison">
           <h2>So sánh các kiến trúc</h2>
           <table>
@@ -208,40 +169,52 @@ function App() {
               <tr>
                 <th>Tiêu chí</th>
                 <th>Copilot Studio</th>
-                <th>Azure AI Foundry</th>
-                <th>Custom Project</th>
+                <th>n8n</th>
+                <th>BSRAgent</th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <td>Độ dễ sử dụng</td>
                 <td>Cao</td>
+                <td>Cao</td>
                 <td>Trung bình</td>
-                <td>Thấp</td>
               </tr>
               <tr>
                 <td>Khả năng tùy chỉnh</td>
                 <td>Thấp</td>
-                <td>Cao</td>
+                <td>Trung bình</td>
                 <td>Cao</td>
               </tr>
               <tr>
                 <td>Chi phí triển khai</td>
                 <td>Trung bình</td>
-                <td>Cao</td>
-                <td>Cao</td>
+                <td>Thấp–Trung bình (self-host)</td>
+                <td>Thấp–Trung bình (self-host)</td>
               </tr>
               <tr>
                 <td>Thời gian phát triển</td>
                 <td>Nhanh</td>
-                <td>Trung bình</td>
-                <td>Lâu</td>
+                <td>Nhanh</td>
+                <td>Nhanh–Trung bình</td>
               </tr>
               <tr>
                 <td>Khả năng mở rộng</td>
                 <td>Trung bình</td>
-                <td>Cao</td>
-                <td>Cao</td>
+                <td>Trung bình–Cao (queue/worker)</td>
+                <td>Trung bình–Cao (multi-agent + API)</td>
+              </tr>
+              <tr>
+                <td>Điểm mạnh nổi bật</td>
+                <td>Tích hợp sâu M365 + governance enterprise</td>
+                <td>Kéo-thả automation + connectors phong phú</td>
+                <td>Tool calling + observability + capability routing</td>
+              </tr>
+              <tr>
+                <td>Phù hợp nhất</td>
+                <td>Doanh nghiệp M365 muốn triển khai nhanh chatbot/agent</td>
+                <td>Tự động hoá quy trình + tích hợp hệ thống nhanh</td>
+                <td>Đội kỹ thuật cần agent framework CLI/API + kiểm soát tool/routing</td>
               </tr>
             </tbody>
           </table>
