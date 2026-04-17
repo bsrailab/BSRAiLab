@@ -1,8 +1,19 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.css';
 import MermaidDiagram from './MermaidDiagram';
 
 function App() {
+  const [theme, setTheme] = useState<'light' | 'dark'>(() => {
+    if (typeof window === 'undefined') return 'light';
+
+    const savedTheme = window.localStorage.getItem('theme');
+    if (savedTheme === 'light' || savedTheme === 'dark') {
+      return savedTheme;
+    }
+
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  });
+
   const logoUrl = `${import.meta.env.BASE_URL}logoBSR.png`;
   const copilotFlow = `
   graph TD
@@ -27,9 +38,24 @@ function App() {
     C --> D[Output]
   `;
 
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme;
+    window.localStorage.setItem('theme', theme);
+  }, [theme]);
+
   return (
     <div className="App">
       <header className="App-header">
+        <div className="header-toolbar">
+          <button
+            type="button"
+            className="theme-toggle"
+            onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
+            aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
+          >
+            {theme === 'light' ? 'Dark mode' : 'Light mode'}
+          </button>
+        </div>
         <div className="hero-brand">
           <img src={logoUrl} alt="BSR AI Lab logo" className="hero-logo" />
           <div className="hero-copy">
