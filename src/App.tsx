@@ -3,6 +3,7 @@ import './App.css';
 import CopilotArchitectureDiagram from './CopilotArchitectureDiagram';
 import N8nArchitectureDiagram from './N8nArchitectureDiagram';
 import BSRAgentArchitectureDiagram from './BSRAgentArchitectureDiagram';
+import OrganizationChart from './OrganizationChart';
 
 function App() {
   const [theme, setTheme] = useState<'light' | 'dark'>(() => {
@@ -66,6 +67,8 @@ function App() {
             </ul>
           </div>
         </div>
+
+        <OrganizationChart />
       </header>
       <main>
         <section id="copilot-studio">
