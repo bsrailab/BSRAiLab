@@ -89,9 +89,12 @@ const agCX = t4X.map(x => x + T4W / 2);
 
 // ── Edges ─────────────────────────────────────────────────────
 const edges: EdgeConfig[] = [
-  // T1 → T2  (each channel to appropriate T2 box)
-  { id: 't1-teams', d: `M ${t1X[0]+T1W/2} ${T1Y+T1H} L ${t1X[0]+T1W/2} ${T2Y}`, tone: 'teal', endMarker: true,
-    label: { x: t1X[0]+T1W/2+8, y: T1Y+T1H+28, lines: ['Chat / Chatbot'], align: 'start' } },
+  // T1 → T2/T3
+  // Teams bypasses T2 — Copilot Studio IS the Teams bot (native Bot Framework integration)
+  { id: 't1-teams',
+    d: `M ${t1X[0]+T1W/2} ${T1Y+T1H} C ${t1X[0]+T1W/2} ${Math.round((T1Y+T1H+T3Y)/2)} 596 ${T3Y-30} 596 ${T3Y}`,
+    tone: 'teal', endMarker: true,
+    label: { x: t1X[0]+T1W/2+8, y: T1Y+T1H+30, lines: ['Direct →', 'Copilot Studio'], align: 'start' } },
   { id: 't1-http',  d: `M ${t1X[1]+T1W/2} ${T1Y+T1H} L ${t1X[1]+T1W/2} ${T2Y}`, tone: 'amber', endMarker: true,
     label: { x: t1X[1]+T1W/2+8, y: T1Y+T1H+28, lines: ['REST / Webhook'], align: 'start' } },
   { id: 't1-admin', d: `M ${t1X[2]+T1W/2} ${T1Y+T1H} L ${t1X[2]+T1W/2} ${T2Y}`, tone: 'dark', endMarker: true },
@@ -153,20 +156,28 @@ function Card({ x, y, width, height, title, subtitle, icon, variant = 'plain', c
   const tl = toLines(title);
   const sl = toLines(subtitle);
   const anchor = center && !icon ? 'middle' : ('start' as const);
-  const tx = center && !icon ? x + width / 2 : x + 56;
+  const tx = center && !icon ? x + width / 2 : x + 50;
   const ty = compact ? y + 26 : sl.length ? y + 32 : y + height / 2 + 5;
+  const titleLH = compact ? 14 : 18;
+  // subtitle Y accounts for all title lines to prevent overlap
+  const subtitleY = ty + titleLH * tl.length + (compact ? 2 : 4);
   const cls = variant === 'plain' ? 'enterprise-diagram__card' : `enterprise-diagram__card enterprise-diagram__card--${variant}`;
   return (
     <g filter="url(#uniShadow)">
       <rect x={x} y={y} width={width} height={height} rx="11" className={cls} />
-      {icon && <>
-        <rect x={x+12} y={y+12} width="30" height="18" rx="9" className="enterprise-diagram__icon-chip" />
-        <text x={x+27} y={y+25} textAnchor="middle" className="enterprise-diagram__icon-chip-text">{icon}</text>
-      </>}
+      {icon && (
+        <g className={`icon-ph icon-ph--${icon}`}>
+          <rect x={x+10} y={y+10} width="28" height="28" rx="7" className="enterprise-diagram__icon-chip" />
+          <rect x={x+14} y={y+15} width="8" height="8" rx="2" fill="rgba(255,255,255,0.6)" />
+          <rect x={x+24} y={y+15} width="8" height="8" rx="2" fill="rgba(255,255,255,0.38)" />
+          <rect x={x+14} y={y+25} width="8" height="8" rx="2" fill="rgba(255,255,255,0.38)" />
+          <rect x={x+24} y={y+25} width="8" height="8" rx="2" fill="rgba(255,255,255,0.6)" />
+        </g>
+      )}
       {mlText(tx, ty, tl,
         compact ? 'enterprise-diagram__card-title enterprise-diagram__card-title--compact' : 'enterprise-diagram__card-title',
-        anchor, compact ? 14 : 18)}
-      {sl.length ? mlText(anchor === 'middle' ? x+width/2 : x+56, ty + (compact ? 16 : 22), sl, 'enterprise-diagram__card-subtitle', anchor, 14) : null}
+        anchor, titleLH)}
+      {sl.length ? mlText(anchor === 'middle' ? x+width/2 : x+50, subtitleY, sl, 'enterprise-diagram__card-subtitle', anchor, 14) : null}
     </g>
   );
 }
@@ -270,7 +281,7 @@ const UnifiedArchitectureDiagram: React.FC = () => {
 
         {/* BSR Agent */}
         <Card x={BSR_X} y={T2Y+14} width={BSR_W} height={T2H-14} variant="bsr"
-          title={['BSR Agent']} subtitle={['Entry Point · Auth', '/ Rate Limit']} icon="BSR" compact center />
+          title={['Custom Gateway']} subtitle={['Auth · Rate Limit', 'HTTP / Non-Teams']} icon="GW" compact center />
 
         {/* Ability Routing & Policy (center, large) */}
         <g filter="url(#uniShadow)">
@@ -332,8 +343,11 @@ const UnifiedArchitectureDiagram: React.FC = () => {
         {/* Azure OpenAI */}
         <g filter="url(#uniShadow)">
           <rect x={t3bX[0]} y={T3BY+8} width={T3BW} height={T3BH-8} rx="10" className="enterprise-diagram__card enterprise-diagram__card--ai" />
-          <rect x={t3bX[0]+10} y={T3BY+14} width="30" height="18" rx="9" className="enterprise-diagram__icon-chip" />
-          <text x={t3bX[0]+25} y={T3BY+27} textAnchor="middle" className="enterprise-diagram__icon-chip-text">AI</text>
+          <rect x={t3bX[0]+10} y={T3BY+12} width="28" height="28" rx="7" className="enterprise-diagram__icon-chip" />
+          <rect x={t3bX[0]+14} y={T3BY+17} width="8" height="8" rx="2" fill="rgba(255,255,255,0.6)" />
+          <rect x={t3bX[0]+24} y={T3BY+17} width="8" height="8" rx="2" fill="rgba(255,255,255,0.38)" />
+          <rect x={t3bX[0]+14} y={T3BY+27} width="8" height="8" rx="2" fill="rgba(255,255,255,0.38)" />
+          <rect x={t3bX[0]+24} y={T3BY+27} width="8" height="8" rx="2" fill="rgba(255,255,255,0.6)" />
           {mlText(t3bX[0]+T3BW/2, T3BY+30, 'Azure OpenAI — AI Model', 'enterprise-diagram__card-title enterprise-diagram__card-title--compact', 'middle')}
           {mlText(t3bX[0]+T3BW/2, T3BY+46, ['GPT-4o · GPT-4o-mini · Ada-Embedding', '(hosted on Azure AI Foundry)'], 'enterprise-diagram__card-subtitle', 'middle')}
         </g>
@@ -341,8 +355,11 @@ const UnifiedArchitectureDiagram: React.FC = () => {
         {/* Memory & Vector Store */}
         <g filter="url(#uniShadow)">
           <rect x={t3bX[1]} y={T3BY+8} width={T3BW} height={T3BH-8} rx="10" className="enterprise-diagram__card enterprise-diagram__card--ai" />
-          <rect x={t3bX[1]+10} y={T3BY+14} width="30" height="18" rx="9" className="enterprise-diagram__icon-chip" />
-          <text x={t3bX[1]+25} y={T3BY+27} textAnchor="middle" className="enterprise-diagram__icon-chip-text">MEM</text>
+          <rect x={t3bX[1]+10} y={T3BY+12} width="28" height="28" rx="7" className="enterprise-diagram__icon-chip" />
+          <rect x={t3bX[1]+14} y={T3BY+17} width="8" height="8" rx="2" fill="rgba(255,255,255,0.6)" />
+          <rect x={t3bX[1]+24} y={T3BY+17} width="8" height="8" rx="2" fill="rgba(255,255,255,0.38)" />
+          <rect x={t3bX[1]+14} y={T3BY+27} width="8" height="8" rx="2" fill="rgba(255,255,255,0.38)" />
+          <rect x={t3bX[1]+24} y={T3BY+27} width="8" height="8" rx="2" fill="rgba(255,255,255,0.6)" />
           {mlText(t3bX[1]+T3BW/2, T3BY+30, 'Memory & Vector Store', 'enterprise-diagram__card-title enterprise-diagram__card-title--compact', 'middle')}
           {mlText(t3bX[1]+T3BW/2, T3BY+46, ['Conversation history · Embeddings', 'Session state (Redis / CosmosDB)'], 'enterprise-diagram__card-subtitle', 'middle')}
         </g>
@@ -350,8 +367,11 @@ const UnifiedArchitectureDiagram: React.FC = () => {
         {/* RAG / Azure AI Search */}
         <g filter="url(#uniShadow)">
           <rect x={t3bX[2]} y={T3BY+8} width={T3BW} height={T3BH-8} rx="10" className="enterprise-diagram__card enterprise-diagram__card--ai" />
-          <rect x={t3bX[2]+10} y={T3BY+14} width="30" height="18" rx="9" className="enterprise-diagram__icon-chip" />
-          <text x={t3bX[2]+25} y={T3BY+27} textAnchor="middle" className="enterprise-diagram__icon-chip-text">RAG</text>
+          <rect x={t3bX[2]+10} y={T3BY+12} width="28" height="28" rx="7" className="enterprise-diagram__icon-chip" />
+          <rect x={t3bX[2]+14} y={T3BY+17} width="8" height="8" rx="2" fill="rgba(255,255,255,0.6)" />
+          <rect x={t3bX[2]+24} y={T3BY+17} width="8" height="8" rx="2" fill="rgba(255,255,255,0.38)" />
+          <rect x={t3bX[2]+14} y={T3BY+27} width="8" height="8" rx="2" fill="rgba(255,255,255,0.38)" />
+          <rect x={t3bX[2]+24} y={T3BY+27} width="8" height="8" rx="2" fill="rgba(255,255,255,0.6)" />
           {mlText(t3bX[2]+T3BW/2, T3BY+30, 'RAG / Azure AI Search', 'enterprise-diagram__card-title enterprise-diagram__card-title--compact', 'middle')}
           {mlText(t3bX[2]+T3BW/2, T3BY+46, ['Knowledge Base Augmentation', 'Vector / Hybrid Index · Azure AI Search'], 'enterprise-diagram__card-subtitle', 'middle')}
         </g>
