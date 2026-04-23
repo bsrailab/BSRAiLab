@@ -4,6 +4,7 @@ import CopilotArchitectureDiagram from './CopilotArchitectureDiagram';
 import N8nArchitectureDiagram from './N8nArchitectureDiagram';
 import BSRAgentArchitectureDiagram from './BSRAgentArchitectureDiagram';
 import OrganizationChart from './OrganizationChart';
+import UnifiedArchitectureDiagram from './UnifiedArchitectureDiagram';
 
 function App() {
   const [theme, setTheme] = useState<'light' | 'dark'>(() => {
@@ -71,6 +72,69 @@ function App() {
         <OrganizationChart />
       </header>
       <main>
+        <section id="agent-workflow">
+          <h2>Kiến trúc chuẩn AI Agent & Workflow Automation — Tổng hợp 3 kiến trúc</h2>
+          <div className="architecture-content">
+            <UnifiedArchitectureDiagram />
+            <div className="description">
+              <h3>Tổng quan</h3>
+              <p>
+                Blueprint chuẩn tổng hợp từ 3 kiến trúc tham chiếu: <strong>Microsoft Copilot Studio + Azure AI Foundry</strong>
+                (cloud stack), <strong>Enterprise Orchestration Master Agent</strong> (generic pattern), và
+                <strong> Botgent Architecture</strong> (BSR platform). Sơ đồ thể hiện rõ nền tảng xây dựng Agent,
+                vị trí AI Model, tầng điều phối và toàn bộ luồng xử lý từ đầu vào đến hệ thống nghiệp vụ.
+              </p>
+              <h3>6 tầng kiến trúc</h3>
+              <ol className="flow-steps">
+                <li>
+                  <strong>T1 — Kênh tiếp nhận:</strong> MS Teams (Rich Chat), HTTP API/Webhook,
+                  Admin Dashboard, Mobile/Web App, Scheduler/Cron. Mọi trigger đều đi qua một điểm
+                  vào duy nhất là BSR Agent ở tầng tiếp theo.
+                </li>
+                <li>
+                  <strong>T2 — Tiếp nhận & Định tuyến (Ability Routing & Policy):</strong>{' '}
+                  <em>BSR Agent</em> là entry-point, xác thực và bọc lệnh; <em>Ability Routing</em>{' '}
+                  phân tích yêu cầu, chọn Agent phù hợp theo chính sách; <em>Governance & Audit</em>{' '}
+                  kiểm soát bảo mật, compliance và ghi log mọi tương tác.
+                </li>
+                <li>
+                  <strong>T3 — Điều phối trung tâm (Microsoft Copilot Studio / Azure AI Foundry):</strong>{' '}
+                  Tầng quan trọng nhất. Các module <em>Intent Parser → Task Planner → Agent Router → Response Builder</em>{' '}
+                  hoạt động trong Microsoft Copilot Studio. AI Core nằm trong Azure AI Foundry gồm:{' '}
+                  <em>Azure OpenAI GPT-4o</em> (LLM), <em>Memory & Vector Store</em> (lịch sử + embedding),
+                  và <em>RAG / Azure AI Search</em> (Knowledge Base Augmentation).
+                </li>
+                <li>
+                  <strong>T4 — Hệ sinh thái Agent (Azure AI Foundry Agent SDK + Botgent Framework):</strong>{' '}
+                  Các Agent chuyên biệt được xây dựng trên <em>Azure AI Foundry Agent SDK</em> và đóng gói
+                  theo <em>Botgent Plugin Architecture</em>: SAP Agent, DOffice Agent, Analytics Agent,
+                  HR Agent, Notification Agent, và các Custom Agent mở rộng.
+                </li>
+                <li>
+                  <strong>T5 — Tích hợp hệ thống:</strong> Kết nối 2 chiều (query + data) với SAP S/4HANA,
+                  SharePoint/Microsoft 365, Data Warehouse/Azure Synapse, HRMS/HCM, Email & Calendar
+                  (Exchange Online), và External APIs bên ngoài.
+                </li>
+                <li>
+                  <strong>T6 — Lưu trữ & Kiểm toán:</strong> SQL/NoSQL Database, Data Lake/Blob Storage,
+                  Vector Database (embeddings), Audit Logs (compliance), Activity History (analytics).
+                </li>
+              </ol>
+              <h3>Nền tảng công nghệ theo tầng</h3>
+              <table>
+                <thead><tr><th>Tầng</th><th>Nền tảng / Công nghệ</th><th>Vai trò</th></tr></thead>
+                <tbody>
+                  <tr><td>T3 — Orchestration</td><td>Microsoft Copilot Studio</td><td>Điều phối luồng, routing, response</td></tr>
+                  <tr><td>T3 — AI Model</td><td>Azure OpenAI GPT-4o (Azure AI Foundry)</td><td>Lý luận, sinh ngôn ngữ tự nhiên</td></tr>
+                  <tr><td>T3 — Knowledge</td><td>Azure AI Search + RAG</td><td>Tìm kiếm tri thức, augmentation</td></tr>
+                  <tr><td>T4 — Agent SDK</td><td>Azure AI Foundry Agent SDK</td><td>Phát triển & deploy sub-agent</td></tr>
+                  <tr><td>T4 — Framework</td><td>Botgent + Plugin Architecture</td><td>Đóng gói agent, quản lý plugin</td></tr>
+                  <tr><td>T2 — Entry</td><td>BSR Agent (custom)</td><td>Entry point, auth, rate limiting</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
         <section id="copilot-studio">
           <h2>Copilot Studio Enterprise Agent Architecture</h2>
           <div className="architecture-content">

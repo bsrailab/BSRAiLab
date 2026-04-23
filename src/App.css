@@ -1535,3 +1535,89 @@ th {
   font-size: 10.5px;
   font-weight: 650;
 }
+
+/* ── AgentWorkflowDiagram extra card variants ── */
+.enterprise-diagram__card--teal {
+  fill: rgba(13, 148, 136, 0.10);
+  stroke: #0d9488;
+  stroke-width: 1.8;
+}
+
+.enterprise-diagram__card--amber {
+  fill: rgba(217, 119, 6, 0.10);
+  stroke: #d97706;
+  stroke-width: 1.8;
+}
+
+.enterprise-diagram__card--indigo {
+  fill: rgba(99, 102, 241, 0.10);
+  stroke: #6366f1;
+  stroke-width: 1.8;
+}
+
+.enterprise-diagram__card--ai {
+  fill: rgba(124, 58, 237, 0.10);
+  stroke: #7c3aed;
+  stroke-width: 1.6;
+}
+
+.enterprise-diagram__card--tool {
+  fill: rgba(22, 163, 74, 0.08);
+  stroke: #16a34a;
+  stroke-width: 1.6;
+}
+
+.enterprise-diagram__card--dashed {
+  fill: rgba(248, 250, 252, 0.80);
+  stroke: #94a3b8;
+  stroke-width: 1.4;
+  stroke-dasharray: 6 4;
+}
+
+/* ── AgentWorkflowDiagram frame containers ── */
+.agent-diagram__orch-frame {
+  fill: rgba(29, 78, 216, 0.04);
+  stroke: #1d4ed8;
+  stroke-width: 2;
+}
+
+.agent-diagram__aicore-frame {
+  fill: rgba(124, 58, 237, 0.04);
+  stroke: #7c3aed;
+  stroke-width: 1.5;
+  stroke-dasharray: 5 4;
+}
+
+/* ── UnifiedArchitectureDiagram extra classes ── */
+.enterprise-diagram__card--bsr {
+  fill: rgba(13, 148, 136, 0.12);
+  stroke: #0f766e;
+  stroke-width: 2;
+}
+
+.enterprise-diagram__card--gov {
+  fill: rgba(107, 114, 128, 0.10);
+  stroke: #6b7280;
+  stroke-width: 1.6;
+}
+
+.agent-diagram__agent-frame {
+  fill: rgba(124, 58, 237, 0.04);
+  stroke: #7c3aed;
+  stroke-width: 2;
+}
+
+.enterprise-diagram__card--green {
+  fill: rgba(22, 163, 74, 0.10);
+  stroke: #16a34a;
+  stroke-width: 1.6;
+}
+
+/* ── Extra edge tones ── */
+.enterprise-diagram__edge--teal {
+  stroke: #0d9488;
+}
+
+.enterprise-diagram__edge--amber {
+  stroke: #d97706;
+}
