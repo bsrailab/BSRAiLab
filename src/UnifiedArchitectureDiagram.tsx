@@ -90,20 +90,18 @@ const agCX = t4X.map(x => x + T4W / 2);
 // ── Edges ─────────────────────────────────────────────────────
 const edges: EdgeConfig[] = [
   // T1 → T2/T3
-  // Teams bypasses T2 — Copilot Studio IS the Teams bot (native Bot Framework integration)
-  { id: 't1-teams',
-    d: `M ${t1X[0]+T1W/2} ${T1Y+T1H} C ${t1X[0]+T1W/2} ${Math.round((T1Y+T1H+T3Y)/2)} 596 ${T3Y-30} 596 ${T3Y}`,
-    tone: 'teal', endMarker: true,
-    label: { x: t1X[0]+T1W/2+8, y: T1Y+T1H+30, lines: ['Direct →', 'Copilot Studio'], align: 'start' } },
-  { id: 't1-http',  d: `M ${t1X[1]+T1W/2} ${T1Y+T1H} L ${t1X[1]+T1W/2} ${T2Y}`, tone: 'amber', endMarker: true,
-    label: { x: t1X[1]+T1W/2+8, y: T1Y+T1H+28, lines: ['REST / Webhook'], align: 'start' } },
-  { id: 't1-admin', d: `M ${t1X[2]+T1W/2} ${T1Y+T1H} L ${t1X[2]+T1W/2} ${T2Y}`, tone: 'dark', endMarker: true },
+  // [0] HTTP Trigger → Custom Gateway (near-vertical: center 231 → gateway 245)
+  { id: 't1-http', d: `M ${t1X[0]+T1W/2} ${T1Y+T1H} L ${BSR_X+BSR_W/2} ${T2Y}`, tone: 'amber', endMarker: true,
+    label: { x: t1X[0]+T1W/2+8, y: T1Y+T1H+28, lines: ['REST / Webhook'], align: 'start' } },
+  // [1] Admin Dashboard → Routing (straight vertical, 517 inside Routing zone)
+  { id: 't1-admin', d: `M ${t1X[1]+T1W/2} ${T1Y+T1H} L ${t1X[1]+T1W/2} ${T2Y}`, tone: 'dark', endMarker: true },
+  // [2] MS Teams → Routing center (near-vertical: 803 → 793, bypasses Custom Gateway)
+  { id: 't1-teams', d: `M ${t1X[2]+T1W/2} ${T1Y+T1H} L ${RTG_X+RTG_W/2} ${T2Y}`, tone: 'teal', endMarker: true },
+  // [3] Mobile/Web → Routing (straight vertical, 1089 inside Routing zone)
   { id: 't1-mob',   d: `M ${t1X[3]+T1W/2} ${T1Y+T1H} L ${t1X[3]+T1W/2} ${T2Y}`, tone: 'dark', endMarker: true },
-  // Scheduler bypasses T2 — n8n has native Cron/Schedule trigger nodes
-  { id: 't1-sched',
-    d: `M ${t1X[4]+T1W/2} ${T1Y+T1H} C 700 ${T1Y+T1H} 700 ${T3Y} ${N8N_X+N8N_W/2} ${T3Y}`,
-    tone: 'violet', endMarker: true,
-    label: { x: t1X[4]+T1W/2+8, y: T1Y+T1H+28, lines: ['Direct →', 'n8n Cron'], align: 'start' } },
+  // [4] Scheduler → n8n directly (near-vertical: 1375 → 1368, bypasses T2)
+  { id: 't1-sched', d: `M ${t1X[4]+T1W/2} ${T1Y+T1H} L ${N8N_X+N8N_W/2} ${T3Y}`, tone: 'violet', endMarker: true,
+    label: { x: t1X[4]+T1W/2+8, y: T1Y+T1H+28, lines: ['→ n8n Cron'], align: 'start' } },
 
   // T2 → T3
   { id: 't2-bsr-orch', d: `M ${BSR_X+BSR_W/2} ${T2Y+T2H} L ${BSR_X+BSR_W/2} ${T3Y}`, tone: 'teal', endMarker: true },
@@ -271,9 +269,9 @@ const UnifiedArchitectureDiagram: React.FC = () => {
             TẦNG 1 — KÊNH TIẾP NHẬN LỆNH
         ══════════════════════════════════════════════════════ */}
         {mlText(840, 52, 'TẦNG 1  —  KÊNH TIẾP NHẬN LỆNH', 'enterprise-diagram__zone-title', 'middle')}
-        <Card x={t1X[0]} y={T1Y+14} width={T1W} height={T1H-14} title="MS Teams" subtitle={['Rich Chat', '/ Chatbot']} icon="MS" variant="teal" compact center />
-        <Card x={t1X[1]} y={T1Y+14} width={T1W} height={T1H-14} title="HTTP Trigger" subtitle={['REST API', '/ Webhook']} icon="API" variant="amber" compact center />
-        <Card x={t1X[2]} y={T1Y+14} width={T1W} height={T1H-14} title="Admin Dashboard" subtitle={['Web Console', '/ Portal']} icon="ADM" compact center />
+        <Card x={t1X[0]} y={T1Y+14} width={T1W} height={T1H-14} title="HTTP Trigger" subtitle={['REST API', '/ Webhook']} icon="API" variant="amber" compact center />
+        <Card x={t1X[1]} y={T1Y+14} width={T1W} height={T1H-14} title="Admin Dashboard" subtitle={['Web Console', '/ Portal']} icon="ADM" compact center />
+        <Card x={t1X[2]} y={T1Y+14} width={T1W} height={T1H-14} title="MS Teams" subtitle={['Rich Chat', '/ Chatbot']} icon="MS" variant="teal" compact center />
         <Card x={t1X[3]} y={T1Y+14} width={T1W} height={T1H-14} title="Mobile / Web App" subtitle={['User Interface']} icon="APP" compact center />
         <Card x={t1X[4]} y={T1Y+14} width={T1W} height={T1H-14} title="Scheduler" subtitle={['Cron / Time-based', 'Automation']} icon="CLK" variant="indigo" compact center />
 
