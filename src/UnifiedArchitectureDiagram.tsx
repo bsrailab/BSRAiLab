@@ -99,8 +99,11 @@ const edges: EdgeConfig[] = [
     label: { x: t1X[1]+T1W/2+8, y: T1Y+T1H+28, lines: ['REST / Webhook'], align: 'start' } },
   { id: 't1-admin', d: `M ${t1X[2]+T1W/2} ${T1Y+T1H} L ${t1X[2]+T1W/2} ${T2Y}`, tone: 'dark', endMarker: true },
   { id: 't1-mob',   d: `M ${t1X[3]+T1W/2} ${T1Y+T1H} L ${t1X[3]+T1W/2} ${T2Y}`, tone: 'dark', endMarker: true },
-  { id: 't1-sched', d: `M ${t1X[4]+T1W/2} ${T1Y+T1H} L ${t1X[4]+T1W/2} ${T2Y}`, tone: 'violet', endMarker: true,
-    label: { x: t1X[4]+T1W/2+8, y: T1Y+T1H+28, lines: ['Cron / Schedule'], align: 'start' } },
+  // Scheduler bypasses T2 — n8n has native Cron/Schedule trigger nodes
+  { id: 't1-sched',
+    d: `M ${t1X[4]+T1W/2} ${T1Y+T1H} C 700 ${T1Y+T1H} 700 ${T3Y} ${N8N_X+N8N_W/2} ${T3Y}`,
+    tone: 'violet', endMarker: true,
+    label: { x: t1X[4]+T1W/2+8, y: T1Y+T1H+28, lines: ['Direct →', 'n8n Cron'], align: 'start' } },
 
   // T2 → T3
   { id: 't2-bsr-orch', d: `M ${BSR_X+BSR_W/2} ${T2Y+T2H} L ${BSR_X+BSR_W/2} ${T3Y}`, tone: 'teal', endMarker: true },
