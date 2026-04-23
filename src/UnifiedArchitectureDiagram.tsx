@@ -68,10 +68,10 @@ const T3BY = 597, T3BH = 82;
 // 3 × w=480, gap=14 → start=108, end=1576 ≤ 1598
 const t3bX = [108, 602, 1096]; const T3BW = 480;
 
-// T4 Agent frame  y=750–925 (h=175)
-const T4Y = 750, T4H = 175;  // bottom = 925
-// 6 agents y=780, h=132
-const T4AY = 780, T4AH = 132;
+// T4 Agent frame  y=750–940 (h=190)
+const T4Y = 750, T4H = 190;  // bottom = 940
+// 6 agents y=800, h=128 → bottom=928 ≤ 940
+const T4AY = 800, T4AH = 128;
 // 6 × w=228, gap=14 → start=108, end=108+6×228+5×14=108+1368+70=1546 ≤ 1598
 const t4X = [108, 350, 592, 834, 1076, 1318]; const T4W = 228;
 
@@ -302,9 +302,6 @@ const UnifiedArchitectureDiagram: React.FC = () => {
         {mlText(CX + CW/2, T3Y+17, 'TẦNG 3  —  ĐIỀU PHỐI TRUNG TÂM (ORCHESTRATION)', 'enterprise-diagram__zone-title', 'middle')}
         {mlText(CX+12, T3Y+30, 'Platform: Microsoft Copilot Studio  +  n8n Workflow Engine (via MCP)', 'enterprise-diagram__card-subtitle', 'start')}
         {mlText(CX + CW - 12, T3Y+30, 'Infrastructure: Azure AI Foundry', 'enterprise-diagram__card-subtitle', 'end')}
-        {mlText(596, T3AY-5, 'Copilot Studio — Orchestration Modules', 'enterprise-diagram__card-subtitle', 'middle')}
-        {mlText(N8N_X + N8N_W/2, T3AY-5, 'n8n Workflow Engine', 'enterprise-diagram__card-subtitle', 'middle')}
-
         {/* T3A — Copilot Studio Orchestration Modules */}
         <Card x={t3aX[0]} y={T3AY} width={T3AW} height={T3AH} variant="blue" compact center
           title="Intent Parser" subtitle={['Phân tích ý định', '& ngữ cảnh (Context)']} />
@@ -338,7 +335,7 @@ const UnifiedArchitectureDiagram: React.FC = () => {
           <rect x={t3bX[0]+10} y={T3BY+14} width="30" height="18" rx="9" className="enterprise-diagram__icon-chip" />
           <text x={t3bX[0]+25} y={T3BY+27} textAnchor="middle" className="enterprise-diagram__icon-chip-text">AI</text>
           {mlText(t3bX[0]+T3BW/2, T3BY+30, 'Azure OpenAI — AI Model', 'enterprise-diagram__card-title enterprise-diagram__card-title--compact', 'middle')}
-          {mlText(t3bX[0]+T3BW/2, T3BY+46, 'GPT-4o · GPT-4o-mini · Ada-Embedding  (hosted on Azure AI Foundry)', 'enterprise-diagram__card-subtitle', 'middle')}
+          {mlText(t3bX[0]+T3BW/2, T3BY+46, ['GPT-4o · GPT-4o-mini · Ada-Embedding', '(hosted on Azure AI Foundry)'], 'enterprise-diagram__card-subtitle', 'middle')}
         </g>
 
         {/* Memory & Vector Store */}
@@ -347,7 +344,7 @@ const UnifiedArchitectureDiagram: React.FC = () => {
           <rect x={t3bX[1]+10} y={T3BY+14} width="30" height="18" rx="9" className="enterprise-diagram__icon-chip" />
           <text x={t3bX[1]+25} y={T3BY+27} textAnchor="middle" className="enterprise-diagram__icon-chip-text">MEM</text>
           {mlText(t3bX[1]+T3BW/2, T3BY+30, 'Memory & Vector Store', 'enterprise-diagram__card-title enterprise-diagram__card-title--compact', 'middle')}
-          {mlText(t3bX[1]+T3BW/2, T3BY+46, 'Conversation history · Embeddings · Session state (Redis / CosmosDB)', 'enterprise-diagram__card-subtitle', 'middle')}
+          {mlText(t3bX[1]+T3BW/2, T3BY+46, ['Conversation history · Embeddings', 'Session state (Redis / CosmosDB)'], 'enterprise-diagram__card-subtitle', 'middle')}
         </g>
 
         {/* RAG / Azure AI Search */}
@@ -356,7 +353,7 @@ const UnifiedArchitectureDiagram: React.FC = () => {
           <rect x={t3bX[2]+10} y={T3BY+14} width="30" height="18" rx="9" className="enterprise-diagram__icon-chip" />
           <text x={t3bX[2]+25} y={T3BY+27} textAnchor="middle" className="enterprise-diagram__icon-chip-text">RAG</text>
           {mlText(t3bX[2]+T3BW/2, T3BY+30, 'RAG / Azure AI Search', 'enterprise-diagram__card-title enterprise-diagram__card-title--compact', 'middle')}
-          {mlText(t3bX[2]+T3BW/2, T3BY+46, 'Knowledge Base Augmentation · Vector / Hybrid Index · Azure AI Search', 'enterprise-diagram__card-subtitle', 'middle')}
+          {mlText(t3bX[2]+T3BW/2, T3BY+46, ['Knowledge Base Augmentation', 'Vector / Hybrid Index · Azure AI Search'], 'enterprise-diagram__card-subtitle', 'middle')}
         </g>
 
         {/* ══════════════════════════════════════════════════════
