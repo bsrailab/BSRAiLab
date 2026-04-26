@@ -90,18 +90,22 @@ const agCX = t4X.map(x => x + T4W / 2);
 // ── Edges ─────────────────────────────────────────────────────
 const edges: EdgeConfig[] = [
   // T1 → T2/T3
-  // [0] HTTP Trigger → Custom Gateway (near-vertical: center 231 → gateway 245)
+  // [0] HTTP Trigger → Custom Gateway (near-vertical: 231 → 245, Δ=14px)
   { id: 't1-http', d: `M ${t1X[0]+T1W/2} ${T1Y+T1H} L ${BSR_X+BSR_W/2} ${T2Y}`, tone: 'amber', endMarker: true,
-    label: { x: t1X[0]+T1W/2+8, y: T1Y+T1H+28, lines: ['REST / Webhook'], align: 'start' } },
-  // [1] Admin Dashboard → Routing (straight vertical, 517 inside Routing zone)
-  { id: 't1-admin', d: `M ${t1X[1]+T1W/2} ${T1Y+T1H} L ${t1X[1]+T1W/2} ${T2Y}`, tone: 'dark', endMarker: true },
-  // [2] MS Teams → Routing center (near-vertical: 803 → 793, bypasses Custom Gateway)
+    label: { x: t1X[0]+T1W/2+8, y: T1Y+T1H+26, lines: ['REST / Webhook'], align: 'start' } },
+  // [1] Admin Dashboard → Custom Gateway (smooth arc: 517 → 245, fan-in)
+  { id: 't1-admin',
+    d: `M ${t1X[1]+T1W/2} ${T1Y+T1H} C ${t1X[1]+T1W/2 - 77} ${T1Y+T1H+35} ${BSR_X+BSR_W/2 + 68} ${T2Y-5} ${BSR_X+BSR_W/2} ${T2Y}`,
+    tone: 'dark', endMarker: true },
+  // [2] MS Teams → Routing center (near-vertical: 803 → 793, Δ=10px, bypasses Gateway)
   { id: 't1-teams', d: `M ${t1X[2]+T1W/2} ${T1Y+T1H} L ${RTG_X+RTG_W/2} ${T2Y}`, tone: 'teal', endMarker: true },
-  // [3] Mobile/Web → Routing (straight vertical, 1089 inside Routing zone)
-  { id: 't1-mob',   d: `M ${t1X[3]+T1W/2} ${T1Y+T1H} L ${t1X[3]+T1W/2} ${T2Y}`, tone: 'dark', endMarker: true },
-  // [4] Scheduler → n8n directly (near-vertical: 1375 → 1368, bypasses T2)
-  { id: 't1-sched', d: `M ${t1X[4]+T1W/2} ${T1Y+T1H} L ${N8N_X+N8N_W/2} ${T3Y}`, tone: 'violet', endMarker: true,
-    label: { x: t1X[4]+T1W/2+8, y: T1Y+T1H+28, lines: ['→ n8n Cron'], align: 'start' } },
+  // [3] Mobile/Web → Routing center (smooth arc: 1089 → 793, fan-in)
+  { id: 't1-mob',
+    d: `M ${t1X[3]+T1W/2} ${T1Y+T1H} C ${t1X[3]+T1W/2 - 83} ${T1Y+T1H+35} ${RTG_X+RTG_W/2 + 74} ${T2Y-5} ${RTG_X+RTG_W/2} ${T2Y}`,
+    tone: 'dark', endMarker: true },
+  // [4] Scheduler → GOV center (near-vertical: 1375 → 1397, Δ=22px; GOV routes to n8n)
+  { id: 't1-sched', d: `M ${t1X[4]+T1W/2} ${T1Y+T1H} L ${GOV_X+GOV_W/2} ${T2Y}`, tone: 'violet', endMarker: true,
+    label: { x: t1X[4]+T1W/2+8, y: T1Y+T1H+26, lines: ['Cron →'], align: 'start' } },
 
   // T2 → T3
   { id: 't2-bsr-orch', d: `M ${BSR_X+BSR_W/2} ${T2Y+T2H} L ${BSR_X+BSR_W/2} ${T3Y}`, tone: 'teal', endMarker: true },
